@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:forcard/main.dart';
 import 'package:forcard/util/job_card.dart';
 
+import '../util/recent_job_card.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -21,16 +23,25 @@ class _HomeState extends State<Home> {
     ['Trem', 'Metrô', 'assets/trem.png', 4],
     ['Onibus', 'Ônibus', 'assets/onibus.png', 3],
   ];
+
+  final List recentJobs = [
+    // [ companyName, jobTitle, logoImagePath, hourlyRate ]
+    ['11/09/22', 'Ônibus', 'assets/onibus.png', '7:30'],
+    ['08/09/22', 'Bicicleta', 'assets/bicicleta.png', '15:22'],
+    ['08/09/22', 'Trem', 'assets/trem.png', '13:41'],
+    ['05/09/22', 'Carro', 'assets/carro.png', '7:00'],
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.grey[100],
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         // ignore: prefer_const_literals_to_create_immutables
         children: [
           SizedBox(
-            height: 75,
+            height: 50,
           ),
           // app bar
           Padding(
@@ -39,11 +50,12 @@ class _HomeState extends State<Home> {
               height: 50,
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.white),
+                border: Border.all(color: Color.fromARGB(255, 255, 255, 255)),
                 borderRadius: BorderRadius.circular(12),
-                color: Colors.grey[200],
+                color: Color.fromARGB(255, 253, 168, 41),
               ),
-              child: Image.asset('assets/menu.png', color: Colors.grey[800]),
+              child: Image.asset('assets/menu.png',
+                  color: Color.fromARGB(255, 255, 255, 255)),
             ),
           ),
 
@@ -70,8 +82,9 @@ class _HomeState extends State<Home> {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.white),
+                      color: Colors.white,
+                      border:
+                          Border.all(color: Color.fromARGB(255, 255, 217, 160)),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Row(
@@ -81,7 +94,7 @@ class _HomeState extends State<Home> {
                           child: Container(
                             height: 25,
                             child: Image.asset('assets/lupa.png',
-                                color: Colors.grey[600]),
+                                color: Color.fromARGB(255, 255, 217, 160)),
                           ),
                         ),
                         Expanded(
@@ -101,7 +114,7 @@ class _HomeState extends State<Home> {
                     height: 50,
                     padding: EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                        color: Colors.grey[800],
+                        color: Color.fromARGB(255, 253, 168, 41),
                         borderRadius: BorderRadius.circular(12)),
                     child: Image.asset('assets/preferencias.png',
                         color: Colors.white),
@@ -111,7 +124,7 @@ class _HomeState extends State<Home> {
             ),
           ),
 
-          SizedBox(height: 50),
+          SizedBox(height: 30),
 
           // for you -> job cards
 
@@ -141,9 +154,35 @@ class _HomeState extends State<Home> {
                 );
               },
             ),
-          )
+          ),
+
+          SizedBox(height: 50),
 
           //recently add -> job titles
+          Padding(
+            padding: const EdgeInsets.only(left: 25.0),
+            child: Text(
+              'Extrato',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+            ),
+          ),
+
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: ListView.builder(
+                itemCount: recentJobs.length,
+                itemBuilder: (context, index) {
+                  return RecentJobCard(
+                    companyName: recentJobs[index][0],
+                    jobTitle: recentJobs[index][1],
+                    logoImagePath: recentJobs[index][2],
+                    hourlyRate: recentJobs[index][3],
+                  );
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );

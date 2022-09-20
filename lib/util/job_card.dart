@@ -24,7 +24,7 @@ class JobCard extends StatelessWidget {
         child: Container(
           width: 200,
           padding: EdgeInsets.all(12),
-          color: Colors.grey[200],
+          color: Colors.white,
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,7 +34,10 @@ class JobCard extends StatelessWidget {
                   children: [
                     Container(
                       height: 60,
-                      child: Image.asset(logoImagePath),
+                      child: Image.asset(
+                        logoImagePath,
+                        color: Colors.orange,
+                      ),
                     ),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(5),
@@ -45,7 +48,7 @@ class JobCard extends StatelessWidget {
                           'Por tempo',
                           style: TextStyle(color: Colors.white),
                         ),
-                        color: Colors.grey[500],
+                        color: Color.fromARGB(255, 253, 168, 41),
                       ),
                     ),
                   ],
@@ -59,6 +62,7 @@ class JobCard extends StatelessWidget {
                 ),
                 Text(
                   'R' '\$' + hourlyRate.toString() + '/hr',
+                  style: TextStyle(color: Colors.grey[600]),
                 ),
               ]),
         ),
