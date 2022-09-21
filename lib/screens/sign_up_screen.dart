@@ -64,6 +64,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   TextFormField(
+                    controller: _nameInputController,
+                    autofocus: true,
+                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                    decoration: InputDecoration(
+                      labelText: "Cpf",
+                      labelStyle: TextStyle(color: Colors.white),
+                      prefixIcon: Icon(
+                        Icons.account_circle_outlined,
+                        color: Colors.white,
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.yellow),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.yellow),
+                      ),
+                    ),
+                  ),
+                  TextFormField(
                     controller: _mailInputController,
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
