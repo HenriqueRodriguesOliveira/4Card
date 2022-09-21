@@ -67,9 +67,9 @@ class _HomeState extends State<Home> {
             child: Text(
               'Procurar modalidades',
               style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 26,
-              ),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 26,
+                  fontFamily: 'Roboto'),
             ),
           ),
 
