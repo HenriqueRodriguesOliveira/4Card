@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Startup Name Generator',
-      home: Home(),
+      home: Splash(),
       theme: ThemeData(fontFamily: 'Roboto'),
     );
   }

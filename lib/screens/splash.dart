@@ -41,20 +41,16 @@ class _SplashState extends State<Splash> {
 
           // dot indicators
           Container(
+              padding: EdgeInsets.only(right: 230),
               alignment: Alignment(0, 0.75),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      _controller.jumpToPage(2);
-                    },
-                    child: Text('skip', style: TextStyle(color: Colors.yellow)),
-                  ),
                   SmoothPageIndicator(
                       controller: _controller,
                       count: 3,
                       effect: ExpandingDotsEffect(
+                          spacing: 12,
                           dotColor: Colors.white,
                           activeDotColor: Color.fromARGB(255, 255, 213, 0))),
                   onLastPage
@@ -65,10 +61,8 @@ class _SplashState extends State<Splash> {
                               return LoginScreen();
                             }));
                           },
-                          child: Text(
-                            'done',
-                            style: TextStyle(color: Colors.yellow),
-                          ),
+                          child: Icon(Icons.close,
+                              color: Colors.yellow[200], size: 30),
                         )
                       : GestureDetector(
                           onTap: () {
@@ -76,8 +70,11 @@ class _SplashState extends State<Splash> {
                                 duration: Duration(milliseconds: 500),
                                 curve: Curves.easeIn);
                           },
-                          child: Text('next',
-                              style: TextStyle(color: Colors.yellow)),
+                          child: Icon(
+                            Icons.navigate_next,
+                            color: Colors.yellow[200],
+                            size: 30,
+                          ),
                         )
                 ],
               )),

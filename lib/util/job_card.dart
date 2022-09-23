@@ -57,7 +57,7 @@ class JobCard extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
                     jobTitle,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    style: TextStyle(fontSize: 24),
                   ),
                 ),
                 Text(

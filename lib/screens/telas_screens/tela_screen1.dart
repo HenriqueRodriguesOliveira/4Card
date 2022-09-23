@@ -10,9 +10,9 @@ class screen1 extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 400.0, right: 20.0),
+            padding: const EdgeInsets.only(top: 450.0, right: 30.0),
             child: Center(
-              child: Text('BEM VINDO AO 4CARD!',
+              child: Text('BEM VINDO AO 4CARD',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 35,
