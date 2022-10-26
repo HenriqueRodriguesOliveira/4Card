@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forcard/main.dart';
 import 'package:forcard/util/job_card.dart';
-
-import '../util/recent_job_card.dart';
+import 'package:forcard/util/recent_job_card.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

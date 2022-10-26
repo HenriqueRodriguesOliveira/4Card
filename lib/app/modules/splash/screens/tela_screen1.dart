@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class screen3 extends StatelessWidget {
+class screen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/splash-3.jpg"), fit: BoxFit.cover)),
+              image: AssetImage("assets/splash-1.jpg"), fit: BoxFit.cover)),
       child: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 450.0, right: 30.0),
+          Padding(
+            padding: const EdgeInsets.only(top: 450.0, right: 30.0),
             child: Center(
-              child: Text('TRANSPORTE SEGURO',
+              child: Text('BEM VINDO AO 4CARD',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 35,
@@ -22,8 +22,8 @@ class screen3 extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 10.0, left: 10),
             child: Container(
-              child: const Text(
-                  'Nós nos preocupamos com a sua segurança, nossos transportes são revisados diariamente.',
+              child: Text(
+                  'O nosso compromisso é tornar o seu dia a dia mais fácil!',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
