@@ -39,7 +39,6 @@ class _SplashState extends State<Splash> {
               screen3(),
             ],
           ),
-
           // dot indicators
           Container(
               padding: const EdgeInsets.only(right: 230),
