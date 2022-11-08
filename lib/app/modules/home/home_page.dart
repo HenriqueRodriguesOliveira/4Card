@@ -3,6 +3,8 @@ import 'package:forcard/main.dart';
 import 'package:forcard/util/job_card.dart';
 import 'package:forcard/util/recent_job_card.dart';
 
+import '../profile/profile_page.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -31,35 +33,72 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: const Text('4Card'),
+          centerTitle: true,
+          backgroundColor: Color.fromARGB(255, 253, 168, 41),
+        ),
+        drawer: Drawer(
+          child: Container(
+            color: Colors.white,
+            child: ListView(
+              children: [
+                const DrawerHeader(
+                  child: Center(
+                    child: Text(
+                      '4Card',
+                      style: TextStyle(fontSize: 35),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: const Text(
+                    'Perfil',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Profile()));
+                  },
+                ),
+                ListTile(
+                  title: const Text(
+                    'Recarga',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: const Text(
+                    'Extrato',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  title: const Text(
+                    'Cartão Virtual',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {},
+                )
+              ],
+            ),
+          ),
+        ),
         backgroundColor: Colors.grey[100],
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           // ignore: prefer_const_literals_to_create_immutables
           children: [
-            SizedBox(
-              height: 50,
+            const SizedBox(
+              height: 20,
             ),
-            // app bar
-            Padding(
-              padding: const EdgeInsets.only(left: 25.0),
-              child: Container(
-                height: 50,
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color.fromARGB(255, 255, 255, 255)),
-                  borderRadius: BorderRadius.circular(12),
-                  color: Color.fromARGB(255, 253, 168, 41),
-                ),
-                child: Image.asset('assets/menu.png',
-                    color: Color.fromARGB(255, 255, 255, 255)),
-              ),
-            ),
-
-            SizedBox(height: 25),
 
             //discover a new path
-            Padding(
-              padding: const EdgeInsets.only(left: 25.0),
+            const Padding(
+              padding: EdgeInsets.only(left: 25.0),
               child: Text(
                 'Procurar modalidades',
                 style: TextStyle(
@@ -69,7 +108,7 @@ class _HomeState extends State<Home> {
               ),
             ),
 
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -80,7 +119,7 @@ class _HomeState extends State<Home> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(
-                            color: Color.fromARGB(255, 255, 217, 160)),
+                            color: const Color.fromARGB(255, 255, 217, 160)),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Row(
@@ -91,7 +130,8 @@ class _HomeState extends State<Home> {
                             child: Container(
                               height: 25,
                               child: Image.asset('assets/lupa.png',
-                                  color: Color.fromARGB(255, 255, 217, 160)),
+                                  color:
+                                      const Color.fromARGB(255, 255, 217, 160)),
                             ),
                           ),
                           Expanded(
