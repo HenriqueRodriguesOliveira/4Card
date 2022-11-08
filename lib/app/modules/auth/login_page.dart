@@ -67,7 +67,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  Modular.to.pushNamed("/recharge");
+                  // Modular.to.pushNamed("/recharge");
+                  Modular.to.pushNamed("/extract");
                 },
                 child: const Text(
                   "Esqueceu a senha?",

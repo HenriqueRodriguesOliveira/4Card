@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forcard/values/custom_colors.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
