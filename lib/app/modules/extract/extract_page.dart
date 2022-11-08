@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../values/custom_colors.dart';
-
 class ExtractPage extends StatefulWidget {
   const ExtractPage({super.key});
 
