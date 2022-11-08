@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forcard/main.dart';
 import 'package:forcard/util/job_card.dart';
 import 'package:forcard/util/recent_job_card.dart';
@@ -67,14 +68,18 @@ class _HomeState extends State<Home> {
                     'Recarga',
                     style: TextStyle(fontSize: 20),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Modular.to.navigate('/recharge');
+                  },
                 ),
                 ListTile(
                   title: const Text(
                     'Extrato',
                     style: TextStyle(fontSize: 20),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Modular.to.navigate('/extract');
+                  },
                 ),
                 ListTile(
                   title: const Text(
@@ -193,11 +198,11 @@ class _HomeState extends State<Home> {
               ),
             ),
 
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
 
             //recently add -> job titles
-            Padding(
-              padding: const EdgeInsets.only(left: 25.0),
+            const Padding(
+              padding: EdgeInsets.only(left: 25.0),
               child: Text(
                 'Extrato',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),

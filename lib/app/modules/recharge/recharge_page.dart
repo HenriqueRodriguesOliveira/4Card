@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../values/custom_colors.dart';
 
@@ -18,7 +19,7 @@ class _RechargePageState extends State<RechargePage> {
         labelText: "Valor da Recarga",
         labelStyle: TextStyle(color: Colors.black),
         prefixIcon: Icon(
-          Icons.money,
+          Icons.attach_money,
           color: Colors.black,
         ),
         enabledBorder: OutlineInputBorder(
@@ -128,7 +129,7 @@ class _RechargePageState extends State<RechargePage> {
         centerTitle: true,
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Modular.to.navigate('/home');
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -141,60 +142,62 @@ class _RechargePageState extends State<RechargePage> {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          Form(
-              child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                valueInput(),
-                Container(
-                  height: 30,
-                ),
-                cardInput(),
-                Container(
-                  height: 30,
-                ),
-                Row(
-                  children: [
-                    cvcCvvInput(),
-                    const Spacer(),
-                    dueDateInput(),
-                  ],
-                ),
-                Container(
-                  height: 30,
-                ),
-                cpfInput(),
-                Container(
-                  margin: const EdgeInsets.only(top: 100),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all<EdgeInsets>(
-                          const EdgeInsets.fromLTRB(100, 15, 115, 15)),
-                      backgroundColor: MaterialStateProperty.all(
-                          CustomColors().getActivePrimaryButtonColor()),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Form(
+                child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  valueInput(),
+                  Container(
+                    height: 30,
+                  ),
+                  cardInput(),
+                  Container(
+                    height: 30,
+                  ),
+                  Row(
+                    children: [
+                      cvcCvvInput(),
+                      const Spacer(),
+                      dueDateInput(),
+                    ],
+                  ),
+                  Container(
+                    height: 30,
+                  ),
+                  cpfInput(),
+                  Container(
+                    margin: const EdgeInsets.only(top: 100),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsets>(
+                            const EdgeInsets.fromLTRB(100, 15, 115, 15)),
+                        backgroundColor: MaterialStateProperty.all(
+                            CustomColors().getActivePrimaryButtonColor()),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                      ),
+                      child: const Text(
+                        "Recarrega",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
                         ),
                       ),
                     ),
-                    child: const Text(
-                      "Recarrega",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                      ),
-                    ),
                   ),
-                ),
-              ],
-            ),
-          ))
-        ],
+                ],
+              ),
+            ))
+          ],
+        ),
       ),
     );
   }

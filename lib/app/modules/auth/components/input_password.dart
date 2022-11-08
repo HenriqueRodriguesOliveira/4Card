@@ -14,6 +14,7 @@ class InputPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: true,
       validator: (v) => _validatePassword(v),
       controller: _passwordInputController,
       style: const TextStyle(color: Colors.white),
