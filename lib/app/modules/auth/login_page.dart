@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forcard/app/modules/auth/components/input_email.dart';
 import 'package:forcard/app/modules/auth/components/input_password.dart';
 import 'package:forcard/app/shared/models/user.dart';
@@ -26,12 +27,11 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Processing Data')),
       );
+      Modular.to.pushNamed("/home");
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Hello!')),
+        const SnackBar(content: Text('Erro ao tentar realizar o login!')),
       );
-      // Navigator.push(context,
-      //     MaterialPageRoute(builder: (context) => Home()));
     }
   }
 
@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  print("Funcionou");
+                  Modular.to.pushNamed("/recharge");
                 },
                 child: const Text(
                   "Esqueceu a senha?",
@@ -105,10 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.only(bottom: 10),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SignUpScreen()));
+                    Modular.to.pushNamed("/auth/singup");
                   },
                   child: const Text(
                     "Não possui uma conta? Registre agora.",

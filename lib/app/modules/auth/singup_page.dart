@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forcard/app/modules/auth/components/input_email.dart';
 import 'package:forcard/app/shared/models/user.dart';
 import 'package:forcard/values/custom_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +15,7 @@ class SingUpPage extends StatefulWidget {
 }
 
 class _SingUpPageState extends State<SingUpPage> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameInputController = TextEditingController();
   final TextEditingController _mailInputController = TextEditingController();
   final TextEditingController _passwordInputController =
@@ -20,6 +23,48 @@ class _SingUpPageState extends State<SingUpPage> {
   final TextEditingController _confirmInputController = TextEditingController();
 
   bool showPassword = false;
+
+  _validateName(String? name) {
+    if (name!.isEmpty) {
+      return 'O campo E-mail não pode está vazio';
+    } else if (name.length < 3) {
+      return 'O nome está muito curto. Tente inserir seu sobrenome também.';
+    }
+    return null;
+  }
+
+  _validatePassword(String? password) {
+    if (password!.isEmpty) {
+      return 'O campo não pode está vazio';
+    } else if (password.length < 6) {
+      return 'A senha deve possuir pelo menos 6 caracteres';
+    }
+    return null;
+  }
+
+  _validateConfirmPassword(String? password) {
+    print(_passwordInputController.value);
+    if (password!.isEmpty) {
+      return 'O campo não pode está vazio';
+    } else if (password != _passwordInputController.value.text) {
+      return 'A senhas não coincidem.';
+    }
+    return null;
+  }
+
+  _validateForm() {
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Cadastro realizado com sucesso!')),
+      );
+      Modular.to.pushNamed("/auth");
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Erro ao tentar realizar o cadastro!')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,154 +85,115 @@ class _SingUpPageState extends State<SingUpPage> {
                   height: 200,
                 ),
               ),
-              const Text("Cadastrar conta",
+              const Text("Cadastrar contas",
                   style: TextStyle(color: Colors.white, fontSize: 25)),
               Form(
+                  key: _formKey,
                   child: Column(
-                children: [
-                  TextFormField(
-                    controller: _nameInputController,
-                    autofocus: true,
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255)),
-                    decoration: const InputDecoration(
-                      labelText: "Nome completo",
-                      labelStyle: TextStyle(color: Colors.white),
-                      prefixIcon: Icon(
-                        Icons.account_circle_outlined,
-                        color: Colors.white,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.yellow),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.yellow),
-                      ),
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _nameInputController,
-                    autofocus: true,
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255)),
-                    decoration: const InputDecoration(
-                      labelText: "Cpf",
-                      labelStyle: TextStyle(color: Colors.white),
-                      prefixIcon: Icon(
-                        Icons.account_circle_outlined,
-                        color: Colors.white,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.yellow),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.yellow),
-                      ),
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _mailInputController,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      labelText: "E-mail",
-                      labelStyle: TextStyle(color: Colors.white),
-                      prefixIcon: Icon(
-                        Icons.mail_outline,
-                        color: Colors.white,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.yellow),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.yellow),
-                      ),
-                    ),
-                  ),
-                  (showPassword == false)
-                      ? TextFormField(
-                          controller: _passwordInputController,
-                          obscureText: true,
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
-                            labelText: "Senha",
-                            labelStyle: TextStyle(color: Colors.white),
-                            prefixIcon: Icon(
-                              Icons.vpn_key,
-                              color: Colors.white,
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.yellow),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.yellow),
-                            ),
-                          ),
-                        )
-                      : Container(),
-                  TextFormField(
-                    controller: _confirmInputController,
-                    obscureText: (showPassword == true) ? false : true,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      labelText: "Confirme a Senha",
-                      labelStyle: TextStyle(color: Colors.white),
-                      prefixIcon: Icon(
-                        Icons.vpn_key_outlined,
-                        color: Colors.white,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.yellow),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.yellow),
-                      ),
-                    ),
-                  ),
-                  Row(
                     children: [
-                      Checkbox(
-                        value: showPassword,
-                        onChanged: (value) {
-                          setState(() {
-                            showPassword = value!;
-                          });
-                        },
-                        checkColor: Colors.yellow,
-                        activeColor: Colors.yellow[600],
-                      ),
-                      const Text(
-                        "Mostrar a senha",
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 25),
-                  ),
-                  //Button Cadastrar
-                  ElevatedButton(
-                    onPressed: () {
-                      _doSignUp();
-                      Navigator.pop(context);
-                    },
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all<EdgeInsets>(
-                          const EdgeInsets.fromLTRB(115, 12, 115, 12)),
-                      backgroundColor: MaterialStateProperty.all(
-                          CustomColors().getActivePrimaryButtonColor()),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                      TextFormField(
+                        controller: _nameInputController,
+                        validator: (v) => _validateName(v),
+                        autofocus: true,
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                        decoration: const InputDecoration(
+                          labelText: "Nome completo",
+                          labelStyle: TextStyle(color: Colors.white),
+                          prefixIcon: Icon(
+                            Icons.account_circle_outlined,
+                            color: Colors.white,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.yellow),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.yellow),
+                          ),
                         ),
                       ),
-                    ),
-                    child: const Text(
-                      "Criar Conta",
-                      style: TextStyle(color: Colors.white, fontSize: 15),
-                    ),
-                  ),
-                ],
-              ))
+                      InputEmail(),
+                      TextFormField(
+                        controller: _passwordInputController,
+                        validator: (v) => _validatePassword(v),
+                        obscureText: true,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
+                          labelText: "Senha",
+                          labelStyle: TextStyle(color: Colors.white),
+                          prefixIcon: Icon(
+                            Icons.vpn_key,
+                            color: Colors.white,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.yellow),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.yellow),
+                          ),
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _confirmInputController,
+                        obscureText: true,
+                        validator: (v) => _validateConfirmPassword(v),
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
+                          labelText: "Confirme a Senha",
+                          labelStyle: TextStyle(color: Colors.white),
+                          prefixIcon: Icon(
+                            Icons.vpn_key_outlined,
+                            color: Colors.white,
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.yellow),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.yellow),
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: showPassword,
+                            onChanged: (value) {
+                              setState(() {
+                                showPassword = value!;
+                              });
+                            },
+                            checkColor: Colors.yellow,
+                            activeColor: Colors.yellow[600],
+                          ),
+                          // const Text(
+                          //   "Mostrar a senha",
+                          //   style: TextStyle(color: Colors.white),
+                          // )
+                        ],
+                      ),
+                      //Button Cadastrar
+                      ElevatedButton(
+                        onPressed: () {
+                          _validateForm();
+                        },
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                              const EdgeInsets.fromLTRB(100, 12, 115, 12)),
+                          backgroundColor: MaterialStateProperty.all(
+                              CustomColors().getActivePrimaryButtonColor()),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          "Criar Conta",
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ),
+                      ),
+                    ],
+                  ))
             ],
           ),
         ),
